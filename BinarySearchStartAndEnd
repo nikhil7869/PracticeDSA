@@ -1,0 +1,100 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Practice
+{
+    class BinarySearchStartAndEnd
+    {
+        public static void Main(string[] args)
+        {
+            int[] input = Array.ConvertAll(Console.ReadLine().Split(" "), i => int.Parse(i));
+            int target = Convert.ToInt32(Console.ReadLine());
+            int left = 0, right = input.Length - 1, found = -1, start = -1, end = -1;
+            while (left < right)
+            {
+                int mid = (left + right)/2;
+                if (input[mid] == target)
+                {
+                    found = mid;
+                    break;
+                }
+                else { 
+                    if(target < input[mid])
+                        right = mid - 1;
+                    else
+                        left = mid + 1;
+                }              
+            }
+            if (found > 0)
+            {
+                start = end = found;
+                while (input[start] == input[found] && start >= 0)
+                {
+                    start--;
+                }
+                while (input[end] == input[found] && end < input.Length)
+                {
+                    end++;
+                }
+
+            }
+            Console.WriteLine("{0} {1}", start+1, end-1);
+        }
+
+    }
+}
+
+
+
+/*
+
+
+using System.Collections.Generic;
+
+public class Solution
+{
+    public bool IsValid(string input)
+    {
+        Stack<char> buffer = new Stack<char>();
+
+        bool isValid = true;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            switch (input[i])
+            {
+                case '(':
+                case '{':
+                case '[':
+                    // if opening bracket, just add it to the stack
+                    buffer.Push(input[i]);
+                    break;
+
+                case ')':
+                    // if the stack has elements, pop the top; if matches the closing continue to next char; if doesn't match, it's not - the parenthesis are not matching
+                    isValid = (buffer.Count > 0 && buffer.Pop() == '(');
+                    break;
+
+                case '}':
+                    // if the stack has elements, pop the top; if matches the closing continue to next char; if doesn't match, it's not - the parenthesis are not matching
+                    isValid = (buffer.Count > 0 && buffer.Pop() == '{');
+                    break;
+
+                case ']':
+                    // if the stack has elements, pop the top; if matches the closing continue to next char; if doesn't match, it's not - the parenthesis are not matching
+                    isValid = (buffer.Count > 0 && buffer.Pop() == '[');
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (!isValid) break; // if found non-matching brackets already, just leave
+        }
+
+        return isValid && buffer.Count == 0; // all brackets were found and there are no pending brackets in the stack
+    }
+}
+*/
