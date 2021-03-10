@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Practice3
+{
+    class Node
+    {
+        public int value;
+        public Node next;
+    }
+
+    class LinkedList
+    {
+        public Node head;
+        private Node tail;
+        public LinkedList(int value)
+        {
+            Node node = new Node { value = value, next = null };
+            this.head = node;
+            this.tail = node;
+        }
+        public void AddNode(int value)
+        {
+            Node newNode = new Node { value = value, next = null };
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+
+        public void Traverse()
+        {
+            Node current = this.head;
+            while (current != null)
+            {
+                Console.WriteLine(current.value);
+                current = current.next;
+            }
+        }
+
+        //public void()
+    }
+
+    class ReverseLinkedList
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the elements to form a linked list");
+            int[] intArr = Array.ConvertAll(Console.ReadLine().Split(" "), i => int.Parse(i));
+            LinkedList ll = null;
+
+            foreach(int i in intArr)
+            {
+                if (ll == null)
+                {
+                    ll = new LinkedList(i);
+                }
+                else
+                {
+                    ll.AddNode(i);
+                }
+                
+            }
+
+            ll.Traverse();
+            //ll.Reverse();
+            ll.Traverse();
+
+        }
+
+    }
+}
